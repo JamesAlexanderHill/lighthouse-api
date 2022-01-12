@@ -1,0 +1,18 @@
+{
+  "name": "lighthouse.jamesalexanderhill.com",
+  "version": "1.0.0",
+  "description": "A personal lighthouse endpoint",
+  "main": "index.js",
+  "repository": "git@github.com:JamesAlexanderHill/lighthouse.jamesalexanderhill.com.git",
+  "author": "James Hill <info@jamesalexanderhill.com>",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
