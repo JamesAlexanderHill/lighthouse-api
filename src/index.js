@@ -6,7 +6,7 @@ const desktopConfig = require('./configs/desktop');
 const mobileConfig = require('./configs/mobile');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 const launchChromeAndRunLighthouse = (url, device, categories) => {
     return chromeLauncher.launch({
@@ -42,7 +42,6 @@ app.get('/score', async (req, res) => {
         categoriesArr = categoriesFallback;
     }
 
-    
     console.log(`Testing... ${url} - ${device} - ${categories}`);
     launchChromeAndRunLighthouse(url, device, categoriesArr).then(results => {
         console.log(`Finished:  ${url} - ${device} - ${categories}`);
