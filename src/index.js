@@ -42,9 +42,9 @@ app.get('/score', async (req, res) => {
         categoriesArr = categoriesFallback;
     }
 
-    console.log(`Testing... ${url} - ${device} - ${categories}`);
+    // console.log(`Testing... ${url} - ${device} - ${categories}`);
     launchChromeAndRunLighthouse(url, device, categoriesArr).then(results => {
-        console.log(`Finished:  ${url} - ${device} - ${categories}`);
+        // console.log(`Finished:  ${url} - ${device} - ${categories}`);
         const data = {
             url,
             device,
