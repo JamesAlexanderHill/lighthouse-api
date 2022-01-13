@@ -9,16 +9,19 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const launchChromeAndRunLighthouse = (url, device, categories) => {
-    const flags = {
-        chromeFlags: ['--headless'],
-        onlyCategories: categories,
-    };
-
-    return chromeLauncher.launch(flags).then(chrome => {
-        flags.port = chrome.port;
+    return chromeLauncher.launch({
+        logLevel: "info",
+        chromeFlags: [
+            '--headless',
+            '--disable-gpu',
+            '--no-sandbox',
+        ]}).then(chrome => {
+        console.log('chromeLauncher')
+        const options = {onlyCategories: categories, port: chrome.port, logLevel: "info",};
         const config = device === 'mobile' ? mobileConfig : desktopConfig;
 
-        return lighthouse(url, flags, config).then(results => {
+        return lighthouse(url, options, config).then(results => {
+            console.log('lighthouse')
             return chrome.kill().then(() => results.report);
         });
     });
@@ -40,9 +43,9 @@ app.get('/score', async (req, res) => {
     }
 
     
-
+    console.log(`Testing... ${url} - ${device} - ${categories}`);
     launchChromeAndRunLighthouse(url, device, categoriesArr).then(results => {
-        console.log(`Lighthouse Test: ${url} - ${device} - ${categories}`);
+        console.log(`Finished:  ${url} - ${device} - ${categories}`);
         const data = {
             url,
             device,
