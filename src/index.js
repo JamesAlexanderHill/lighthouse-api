@@ -11,12 +11,11 @@ const app = express();
 const PORT = 3000;
 
 const launchChromeAndRunLighthouse = (url, device, categories) => {
-    return chromeLauncher.launch({
-        chromeFlags: [
-            '--headless',
-            '--disable-gpu',
-            '--no-sandbox',
-        ]}).then(chrome => {
+    return chromeLauncher.launch({chromeFlags: [
+        '--headless',
+        '--disable-gpu',
+        '--no-sandbox',
+    ]}).then(chrome => {
         const options = {onlyCategories: categories, port: chrome.port};
         const config = device === 'mobile' ? mobileConfig : desktopConfig;
 

@@ -1,4 +1,20 @@
-const constants = require('../util/constants.js');
+const DESKTOP_DENSE_4G = {
+    rttMs: 40,
+    throughputKbps: 10 * 1024,
+    cpuSlowdownMultiplier: 1,
+    requestLatencyMs: 0, // 0 means unset
+    downloadThroughputKbps: 0,
+    uploadThroughputKbps: 0,
+};
+const DESKTOP_EMULATION_METRICS = {
+    mobile: false,
+    width: 1350,
+    height: 940,
+    deviceScaleFactor: 1,
+    disabled: false,
+};
+const DESKTOP_USERAGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4695.0 Safari/537.36 Chrome-Lighthouse'; // eslint-disable-line max-len
+
 
 const config = {
     extends: 'lighthouse:default',
@@ -6,9 +22,9 @@ const config = {
         maxWaitForFcp: 15 * 1000,
         maxWaitForLoad: 35 * 1000,
         formFactor: 'desktop',
-        throttling: constants.throttling.desktopDense4G,
-        screenEmulation: constants.screenEmulationMetrics.desktop,
-        emulatedUserAgent: constants.userAgents.desktop,
+        throttling: DESKTOP_DENSE_4G, 
+        screenEmulation: DESKTOP_EMULATION_METRICS,
+        emulatedUserAgent: DESKTOP_USERAGENT,
         // Skip the h2 audit so it doesn't lie to us. See https://github.com/GoogleChrome/lighthouse/issues/6539
         skipAudits: ['uses-http2'],
     },
